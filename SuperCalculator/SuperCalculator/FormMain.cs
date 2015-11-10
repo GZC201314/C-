@@ -27,10 +27,53 @@ namespace SuperCalculator
         {
 
         }
+        public float calculateFrequency()
+        {
+            float startAmount = float.Parse(this.Money.Text);
+            float yearRate = float.Parse(this.Rate.Text);
+            int years = int.Parse(this.Year.Text);
+            float Sum = startAmount;
+            if (this.Methon.Text == "按月算息")
+            {
+                
+                for (int i = 0; i < years * 12;i++)
+                {
+                    Sum = Sum + Sum * (yearRate / 100 / 12);
+                }
+       
+            }
+            if (this.Methon.Text == "按季度算息")
+            {
+                for (int i = 0; i < years * 4; i++)
+                {
+                    Sum = Sum + Sum * (yearRate / 100 / 4);
+                }
+            }
+            if(this.Methon.Text == "按年算息")
+            {
+                for (int i = 0; i < years; i++)
+                {
+                    Sum = Sum + Sum * (yearRate / 100);
+                }
+            }
 
+
+                return Sum;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            float Mon = float.Parse(this.Money.Text);
+            if(float.Parse(this.Money.Text)<100)
+            {
+                this.Money.Clear();
+                this.Money.Paste("输入的存款低于100,不予计算!");
+            }
+            else
+            {
+                float SumMoney = calculateFrequency();
+                this.Sum.Paste(SumMoney.ToString());
+            }
+                
+
 
         }
     }

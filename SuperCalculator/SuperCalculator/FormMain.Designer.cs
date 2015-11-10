@@ -122,6 +122,10 @@
             // Methon
             // 
             this.Methon.FormattingEnabled = true;
+            this.Methon.Items.AddRange(new object[] {
+            "按年算息",
+            "按季度算息",
+            "按月算息"});
             this.Methon.Location = new System.Drawing.Point(194, 181);
             this.Methon.Name = "Methon";
             this.Methon.Size = new System.Drawing.Size(140, 20);
