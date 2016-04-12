@@ -62,9 +62,14 @@ namespace SuperCalculator
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Money.Clear();
+            this.Sum.Clear();
+            this.Year.Clear();
+            this.Rate.Clear();
+
             if(float.Parse(this.Money.Text)<100)
             {
-                this.Money.Clear();
+                
                 this.Money.Paste("输入的存款低于100,不予计算!");
             }
             else
