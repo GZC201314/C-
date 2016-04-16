@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,10 +28,32 @@ namespace Library
         {
             try
             {
-            String str = "Data Source=gzc12;Persist Security Info=True;User ID=sysman;Unicode=True;Password=abc123";
-            OracleConnection conn = new OracleConnection(str);
+                OracleConnection conn = ConnectionOracle.creaConnection ();
                 conn.Open();
-                MessageBox.Show("连接数据库成功!");
+                OracleCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "select count(*) from admins where id='" + Uname.Text + "'and psw='" + Psw.Text + "'";
+                OracleDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+//                    int 
+                    if (reader[0].ToString().Equals("1"))
+                    {
+                    MessageBox.Show("用户已找到,登陆成功");
+                    MainForm main = new MainForm();
+//                        this.Disposing();
+                        this.Hide();    
+                        main.ShowDialog();
+                        
+
+                        
+
+
+                    return;
+                    }
+
+                }
+                MessageBox.Show("没有找到你的记录,请检查输入,或联系管理员.");
+//                cmd.ExecuteReader(str);
             }
             catch (Exception e1)
             {
@@ -38,6 +61,10 @@ namespace Library
                 
                 throw;
             }
+//            ConnectionOracle conn = 
+//            ConnectionOracle conn = new ConnectionOracle();/
+
+            
 
         }
     }
